@@ -2,10 +2,10 @@
 from tkinter import *
 #from param_cours import *
 
-import fct_type
-import fct_duree
+#import fct_type
+#import fct_duree
 import param_cours
-import toto
+#import toto
 
 
 class MenuBar(Frame):
@@ -23,14 +23,14 @@ class MenuBar(Frame):
         
         # Partie "déroulante" :
         me1 = Menu(fileMenuType)
-        me1.add_command(label ='Cours', underline =0, command = boss.cours)
-        me1.add_command(label ='Travaux Dirigés', underline =0, command = boss.travauxDiriges)
-        me1.add_command(label ='Travaux Pratique', underline =0, command = boss.travauxPratique)
+        me1.add_command(label ='Cours', underline =0, command = boss.master.cours)
+        me1.add_command(label ='Travaux Dirigés', underline =0, command = boss.master.travauxDiriges)
+        me1.add_command(label ='Travaux Pratique', underline =0, command = boss.master.travauxPratique)
 
         me2 = Menu(fileMenuDuree)
-        me2.add_command(label ='1h', underline =0, command = boss.duree1h)
-        me2.add_command(label ='2h', underline =0, command = boss.duree2h)
-        me2.add_command(label ='4h', underline =0, command = boss.duree4h)
+        me2.add_command(label ='1h', underline =0, command = boss.master.duree1h)
+        me2.add_command(label ='2h', underline =0, command = boss.master.duree2h)
+        me2.add_command(label ='4h', underline =0, command = boss.master.duree4h)
         
         # Intégration du menu :
         fileMenuType.configure(menu = me1)
@@ -42,12 +42,31 @@ class Application(Frame):
         Frame.__init__(self)
         self.master.title('Fenêtre avec menus')
         self.master.geometry('%dx%d+%d+%d' % (320, 240, 0, 0))
-        mBar = MenuBar(self)
-        mBar.pack()
-        #self.can = Canvas(self, bg='light grey', height=50, width=250, borderwidth =2)
-        #self.can.pack()
-        self.pack()
 
+        """Création de la frame 1"""
+        frame1 = Frame(self.master, bg="yellow", padx=0, pady=0)
+        frame1.pack(side=BOTTOM,fill=X)
+
+        """Création de la frame 2"""
+        frame2 = Frame(self.master, bg="blue")
+        frame2.pack(side=RIGHT,fill=Y)
+
+        b1 = Button(frame2, text ="Quit",command =self.destroy)
+        b1.pack(side =TOP, padx =3, pady =3)
+        
+        mBar = MenuBar(frame1)
+        mBar.pack(side =BOTTOM, fill=X)
+    
+##    """Application principale"""
+##    def __init__(self, boss =None):
+##        Frame.__init__(self)
+##        self.master.title('Fenêtre avec menus')
+##        self.master.geometry('%dx%d+%d+%d' % (320, 240, 0, 0))
+##        mBar = MenuBar(self)
+##        mBar.pack()
+##        #self.can = Canvas(self, bg='light grey', height=50, width=250, borderwidth =2)
+##        #self.can.pack()
+##        self.pack()
     def cours(self):
         print("Cours")
     def travauxDiriges(self):
@@ -61,12 +80,6 @@ class Application(Frame):
     def duree4h(self):
         print("Durée = 4h")
         
-if __name__ == '__main__':
-    app = Application()
-    app.mainloop()
-
-
-
 ##fenetre_principale = Tk()                       # Création d'une fenêtre
 ##fenetre_principale.title("Fiche de présence")   # Titre de la fenêtre
 #### application.attributes('-fullscreen', 1)     # Fenêtre en fullscreen
@@ -92,6 +105,16 @@ if __name__ == '__main__':
 ##
 ##b1 = Button(frame2, text ="Quit",command =fenetre_principale.destroy)
 ##b1.pack(side =TOP, padx =3, pady =3)
+        
+    
+        
+if __name__ == '__main__':
+    app = Application()
+    app.mainloop()
+
+
+
+
 
 
 
